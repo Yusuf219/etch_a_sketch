@@ -24,13 +24,23 @@ const setRandCol = () => {
     const newColor = document.getElementById('setColor');
     newColor.value = '#' + randomColor;
     selectedColor = newColor.value;
+    removeColoredClassFromSquares();
     console.log(newColor.value)
 }
 
 setColor.addEventListener("click", setRandCol)
 
+function removeColoredClassFromSquares() {
+    const squareElements = document.querySelectorAll(".square");
+
+    squareElements.forEach((square) => {
+        square.classList.remove("colored");
+    });
+}
+
 colorInput.addEventListener("input", function() {
     selectedColor = colorInput.value;
+    removeColoredClassFromSquares();
 });
 
 board1.addEventListener("mousedown", function (event) {
@@ -54,9 +64,62 @@ board1.addEventListener("mouseover", function (event) {
     }
 });
 
+// function paintSquare(square) {
+//     if (square.classList.contains("square")) {
+//         square.style.backgroundColor = selectedColor;
+//     }
+// }
+
+function rgbToHex(r, g, b) {
+    const toHex = (value) => value.toString(16).padStart(2, '2');
+    const hexColor = `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+    return hexColor;
+}
+
+function hexToRgb(hex) {
+    hex = hex.replace(/^#/, '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
+// function darkenColor(color, percentage) {
+//     const rgbValues = color.match(/\d+/g);
+//     let r = parseInt(rgbValues[0]);
+//     let g = parseInt(rgbValues[1]);
+//     let b = parseInt(rgbValues[2]);
+
+//     r = Math.max(0, Math.floor(r * (1 - percentage / 100)));
+//     g = Math.max(0, Math.floor(g * (1 - percentage / 100)));
+//     b = Math.max(0, Math.floor(b * (1 - percentage / 100)));
+
+//     return `rgb(${r}, ${g}, ${b})`;
+// }
+
 function paintSquare(square) {
-    if (square.classList.contains("square")) {
-        square.style.backgroundColor = selectedColor;
+    let currentColor = square.style.backgroundColor;
+    let newSelectedColor = hexToRgb(selectedColor)
+    let currentColorClass = currentColor.replace(/[^a-zA-Z0-9]/g, '_');
+    // if (currentColor === newSelectedColor || square.classList.contains(currentColorClass)) {
+    if (square.classList.contains("square")) { 
+        console.log("one")
+        if (!square.classList.contains("colored")) {
+            square.style.backgroundColor = selectedColor
+            square.classList.add("colored")
+        }
+        else {
+            const rgbValues = currentColor.match(/\d+/g);
+            const r = Math.floor(rgbValues[0] * 0.9);
+            const g = Math.floor(rgbValues[1] * 0.9);
+            const b = Math.floor(rgbValues[2] * 0.9);
+            square.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+        }
+    }
+    else {
+        // console.log(currentColor)
+        // console.log(newSelectedColor)
+        // square.style.backgroundColor = selectedColor
     }
 }
 
