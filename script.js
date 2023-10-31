@@ -14,7 +14,7 @@ sizePicker.oninput = () => {
   };
 
 let selectedColor = colorInput.value;
-console.log(selectedColor)
+// console.log(selectedColor)
 
 const setRandCol = () => {
     let randomColor = Math.floor(Math.random()*16777215).toString(16);
@@ -25,7 +25,7 @@ const setRandCol = () => {
     newColor.value = '#' + randomColor;
     selectedColor = newColor.value;
     removeColoredClassFromSquares();
-    console.log(newColor.value)
+    // console.log(newColor.value)
 }
 
 setColor.addEventListener("click", setRandCol)
@@ -103,7 +103,6 @@ function paintSquare(square) {
     let currentColorClass = currentColor.replace(/[^a-zA-Z0-9]/g, '_');
     // if (currentColor === newSelectedColor || square.classList.contains(currentColorClass)) {
     if (square.classList.contains("square")) { 
-        console.log("one")
         if (!square.classList.contains("colored")) {
             square.style.backgroundColor = selectedColor
             square.classList.add("colored")
