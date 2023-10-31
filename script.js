@@ -1,18 +1,33 @@
 const colorInput = document.querySelector('[aria-label="select pen color"]');
 const rangeInput = document.querySelector('[aria-label="select grid size"]');
-const clearButton = document.querySelector('input[type="button"]');
+const clearButton = document.querySelector('#clearButton');
 
 const sizePicker = document.querySelector('input[type="range"]');
 const output = document.querySelector(".output");
 const board1 = document.getElementById("board1");
+const setColor = document.getElementById('genColor');
 
-let paint = false;
+let painting = false;
 
 sizePicker.oninput = () => {
     output.textContent = sizePicker.value;
   };
 
 let selectedColor = colorInput.value;
+console.log(selectedColor)
+
+const setRandCol = () => {
+    let randomColor = Math.floor(Math.random()*16777215).toString(16);
+    while (randomColor.length < 6) {
+        randomColor = '0' + randomColor;
+      }
+    const newColor = document.getElementById('setColor');
+    newColor.value = '#' + randomColor;
+    selectedColor = newColor.value;
+    console.log(newColor.value)
+}
+
+setColor.addEventListener("click", setRandCol)
 
 colorInput.addEventListener("input", function() {
     selectedColor = colorInput.value;
