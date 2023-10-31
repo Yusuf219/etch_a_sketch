@@ -1,0 +1,31 @@
+body {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+}
+
+#board1 {
+    margin: 16px;
+    /* grid-template-columns: repeat(16, 1fr); 
+    grid-template-rows: repeat(16, 1fr); */
+    background: black;
+    border: solid;
+    width: 500px;
+    height: 500px;
+}
+
+.horizontal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.square {
+    background: rgb(255, 255, 255);
+    width: 7.8125px;
+    height: 7.8125px;
+}
+
+.square:hover {
+    background-color: rgb(121, 121, 121);
+}
