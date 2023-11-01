@@ -145,7 +145,7 @@ function handleClearButtonClick() {
     for (let i = divElements.length - 1; i >= 0; i--) {
         board1.removeChild(divElements[i]);
     }
-    makeGrid(max)
+    makeGrid(output.textContent)
     }
 
 function makeGrid(max) {
